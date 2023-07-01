@@ -43,6 +43,18 @@ namespace HospitalManagementSystem.Services
             return null;
         }
 
+        public async Task<Doctor?> ChangeDoctorStatus(ChangeStatusDTO changeStatusDTO)
+        {
+            var doctor = await _repo.Get(changeStatusDTO.DoctorId);
+            if (doctor != null)
+            {
+                doctor.Status = changeStatusDTO.UpdatedStatus;
+                var updatedDoctor = await _repo.Update(doctor);
+                return updatedDoctor;
+            }
+            return null;
+        }
+
         public async Task<Doctor?> DeleteDcotor(int id)
         {
             var deletedDoctor = await _repo.Delete(id);

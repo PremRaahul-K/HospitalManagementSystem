@@ -45,7 +45,7 @@ builder.Services.AddSwaggerGen(c => {
 
 //User Created Services
 builder.Services.AddDbContext<HospitalContext>(op => op.UseSqlServer(builder.Configuration.GetConnectionString("UserCon")));
-builder.Services.AddScoped<IManageUser, ManageUserService>();
+builder.Services.AddScoped<IManageUser, UserService>();
 builder.Services.AddScoped<ITokenGenerate, TokenService>();
 builder.Services.AddScoped<IRepo<int, User>, UserRepo>();
 builder.Services.AddScoped<IRepo<int, Doctor>, DoctorRepo>();

@@ -77,6 +77,17 @@ namespace HospitalManagementSystem.Controllers
             }
             return BadRequest("Unable to Delete doctor details");
         }
-
+        [HttpPut]
+        [ProducesResponseType(typeof(ActionResult<Doctor>), StatusCodes.Status202Accepted)]
+        [ProducesResponseType(StatusCodes.Status400BadRequest)]
+        public async Task<ActionResult<Doctor>> ChangeDoctorStatus(ChangeStatusDTO changeStatusDTO)
+        {
+            var result = await _doctorService.ChangeDoctorStatus(changeStatusDTO);
+            if (result != null)
+            {
+                return Ok(result);
+            }
+            return BadRequest("Unable to Delete doctor details");
+        }
     }
 }

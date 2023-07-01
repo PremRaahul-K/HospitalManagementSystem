@@ -10,5 +10,6 @@ namespace HospitalManagementSystem.Interfaces
         public Task<Doctor?> GetDcotor(int id);
         public Task<ICollection<Doctor>?> GetAllDcotors();
         public Task<Doctor?> UpdateDoctor(Doctor doctor);
+        public Task<Doctor?> ChangeDoctorStatus(ChangeStatusDTO changeStatusDTO);
     }
 }

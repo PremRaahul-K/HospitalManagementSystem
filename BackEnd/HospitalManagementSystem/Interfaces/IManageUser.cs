@@ -6,6 +6,6 @@ namespace HospitalManagementSystem.Interfaces
     public interface IManageUser
     {
         public Task<UserResponseDTO?> Login(UserRequestDTO user);
-        public Task<User?> ChangeDoctorStatus(User user);
+        public Task<UserResponseDTO?> AdminRegistration(UserDTO user);
     }
 }
