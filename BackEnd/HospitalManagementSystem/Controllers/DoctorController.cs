@@ -2,6 +2,7 @@
 using HospitalManagementSystem.Models;
 using HospitalManagementSystem.Models.DTOs;
 using HospitalManagementSystem.Services;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 
@@ -9,6 +10,7 @@ namespace HospitalManagementSystem.Controllers
 {
     [Route("api/[controller]/[action]")]
     [ApiController]
+    [Authorize("Admin")]
     public class DoctorController : ControllerBase
     {
         private readonly IDoctorService _doctorService;

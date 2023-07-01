@@ -25,19 +25,22 @@ namespace HospitalManagementSystem.Services
         {
             UserResponseDTO? userResponseDTO = null;
             var hmac = new HMACSHA512();
-            user.PasswordHash = hmac.ComputeHash(Encoding.UTF8.GetBytes(user.PasswordClear));
-            user.PasswordKey = hmac.Key;
-            user.Role = "Admin";
-            var addedUser = await _userRepo.Add(user);
-            if (addedUser != null)
+            if (user.PasswordClear!=null)
             {
-                userResponseDTO = new UserResponseDTO
+                user.PasswordHash = hmac.ComputeHash(Encoding.UTF8.GetBytes(user.PasswordClear));
+                user.PasswordKey = hmac.Key;
+                user.Role = "Admin";
+                var addedUser = await _userRepo.Add(user);
+                if (addedUser != null)
                 {
-                    Id = addedUser.Id,
-                    Role = addedUser.Role,
-                    Token = await _tokenService.GenerateToken(addedUser)
-                };
-                return userResponseDTO;
+                    userResponseDTO = new UserResponseDTO
+                    {
+                        Id = addedUser.Id,
+                        Role = addedUser.Role,
+                        Token = await _tokenService.GenerateToken(addedUser)
+                    };
+                    return userResponseDTO;
+                }
             }
             return null;
         }

@@ -23,22 +23,28 @@ namespace HospitalManagementSystem.Services
         }
         public async Task<UserResponseDTO?> AddDcotor(DoctorDTO doctor)
         {
-            UserResponseDTO user = null;
+            UserResponseDTO? user = null;
             var hmac = new HMACSHA512();
-            doctor.User.PasswordHash = hmac.ComputeHash(Encoding.UTF8.GetBytes(doctor.PasswordClear));
-            doctor.User.PasswordKey = hmac.Key;
-            doctor.Status = "Not Approved";
-            doctor.User.Role = "Doctor";
-            var addedDoctor = await _repo.Add(doctor);
-            if (addedDoctor != null)
+            if (doctor.User!=null)
             {
-                user = new UserResponseDTO
+                if (doctor.PasswordClear!=null)
                 {
-                    Id = addedDoctor.User.Id,
-                    Role = addedDoctor.User.Role,
-                    Token = await _tokenService.GenerateToken(addedDoctor.User)
-                };
-                return user;
+                    doctor.User.PasswordHash = hmac.ComputeHash(Encoding.UTF8.GetBytes(doctor.PasswordClear));
+                }
+                doctor.User.PasswordKey = hmac.Key;
+                doctor.Status = "Not Approved";
+                doctor.User.Role = "Doctor";
+                var addedDoctor = await _repo.Add(doctor);
+                if ( addedDoctor != null && addedDoctor.User != null)
+                {
+                    user = new UserResponseDTO
+                    {
+                        Id = addedDoctor.User.Id,
+                        Role = addedDoctor.User.Role,
+                        Token = await _tokenService.GenerateToken(addedDoctor.User)
+                    };
+                    return user;
+                }
             }
             return null;
         }
