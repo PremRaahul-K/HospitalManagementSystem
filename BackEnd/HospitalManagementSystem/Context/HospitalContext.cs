@@ -14,9 +14,6 @@ namespace HospitalManagementSystem.Context
         public DbSet<Patient> Patients { get; set; }
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
-            modelBuilder.Entity<User>()
-                        .HasIndex(u => u.Email)
-                        .IsUnique();
             modelBuilder.Entity<Doctor>().Property(i => i.DoctorId).ValueGeneratedNever();
             modelBuilder.Entity<Patient>().Property(i => i.PatientId).ValueGeneratedNever();
         }

@@ -14,7 +14,7 @@ namespace UserAPI.Services
         {
             _key = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(configuration["TokenKey"]));
         }
-        public string GenerateToken(User user)
+        public async Task<string> GenerateToken(User user)
         {
             string token = string.Empty;
             var claims = new List<Claim>

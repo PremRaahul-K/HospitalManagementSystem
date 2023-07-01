@@ -5,7 +5,7 @@ namespace HospitalManagementSystem.Interfaces
 {
     public interface ITokenGenerate
     {
-        public string GenerateToken(User user);
+        public Task<string> GenerateToken(User user);
 
     }
 }

@@ -38,6 +38,10 @@ namespace HospitalManagementSystem.Services
                 if (patient != null)
                 {
                     _context.Patients.Remove(patient);
+                    if (patient.User !=null)
+                    {
+                        _context.Users.Remove(patient.User);
+                    }
                     await _context.SaveChangesAsync();
                     return patient;
                 }

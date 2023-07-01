@@ -48,7 +48,10 @@ builder.Services.AddDbContext<HospitalContext>(op => op.UseSqlServer(builder.Con
 builder.Services.AddScoped<IManageUser, ManageUserService>();
 builder.Services.AddScoped<ITokenGenerate, TokenService>();
 builder.Services.AddScoped<IRepo<int, User>, UserRepo>();
+builder.Services.AddScoped<IRepo<int, Doctor>, DoctorRepo>();
+builder.Services.AddScoped<IRepo<int, Patient>, PatientRepo>();
 builder.Services.AddScoped<IDoctorService, DoctorService>();
+builder.Services.AddScoped<IPatientService, PatientService>();
 builder.Services.AddAuthentication(JwtBearerDefaults.AuthenticationScheme)
 .AddJwtBearer(options =>
 {
