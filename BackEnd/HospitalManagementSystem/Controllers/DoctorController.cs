@@ -10,7 +10,6 @@ namespace HospitalManagementSystem.Controllers
 {
     [Route("api/[controller]/[action]")]
     [ApiController]
-    [Authorize("Admin")]
     public class DoctorController : ControllerBase
     {
         private readonly IDoctorService _doctorService;
@@ -32,6 +31,7 @@ namespace HospitalManagementSystem.Controllers
             return Created("Home", userResponseDTO);
         }
         [HttpPost]
+        //[Authorize(Roles = "Admin")]
         [ProducesResponseType(typeof(ActionResult<Doctor>), StatusCodes.Status200OK)]
         [ProducesResponseType(StatusCodes.Status400BadRequest)]
         public async Task<ActionResult<Doctor>> GetDoctor(int id)
@@ -44,6 +44,7 @@ namespace HospitalManagementSystem.Controllers
             return Ok(doctor);
         }
         [HttpGet]
+        //[Authorize(Roles = "Admin")]
         [ProducesResponseType(typeof(ActionResult<ICollection<Doctor>>), StatusCodes.Status200OK)]
         [ProducesResponseType(StatusCodes.Status400BadRequest)]
         public async Task<ActionResult<ICollection<Doctor>>> GetAllDoctors()
@@ -56,6 +57,7 @@ namespace HospitalManagementSystem.Controllers
             return Ok(doctors);
         }
         [HttpPut]
+        //[Authorize(Roles = "Admin")]
         [ProducesResponseType(typeof(ActionResult<Doctor>), StatusCodes.Status202Accepted)]
         [ProducesResponseType(StatusCodes.Status400BadRequest)]
         public async Task<ActionResult<Doctor>> Update(Doctor doctor)
@@ -68,6 +70,7 @@ namespace HospitalManagementSystem.Controllers
             return BadRequest("Unable to update doctor details");
         }
         [HttpDelete]
+        //[Authorize(Roles = "Admin")]
         [ProducesResponseType(typeof(ActionResult<Doctor>), StatusCodes.Status202Accepted)]
         [ProducesResponseType(StatusCodes.Status400BadRequest)]
         public async Task<ActionResult<Doctor>> Delete(int id)
@@ -80,6 +83,7 @@ namespace HospitalManagementSystem.Controllers
             return BadRequest("Unable to Delete doctor details");
         }
         [HttpPut]
+        //[Authorize(Roles = "Admin")]
         [ProducesResponseType(typeof(ActionResult<Doctor>), StatusCodes.Status202Accepted)]
         [ProducesResponseType(StatusCodes.Status400BadRequest)]
         public async Task<ActionResult<Doctor>> ChangeDoctorStatus(ChangeStatusDTO changeStatusDTO)

@@ -1,0 +1,32 @@
+.headerRow {
+  background-color: #33c2ff;
+}
+table {
+  width: 100%;
+  border-radius: 10px;
+  border: none;
+  border-collapse: collapse;
+  text-align: center;
+}
+th {
+  border: none;
+  border-radius: 10px;
+  border: 1px solid beige;
+  padding: 10px;
+}
+td {
+  font-family: monospace;
+  font-size: 15px;
+}
+@media screen and (max-width: 600px) {
+  .table .smalldoc {
+    padding: 2px;
+    display: none;
+  }
+}
+.profileViewButton {
+  text-decoration: none;
+  background-color: black;
+  padding: 10px;
+  border-radius: 50px;
+}

@@ -1,0 +1,47 @@
+.Admin {
+  display: grid;
+  grid-template-columns: 1fr 10fr;
+}
+.sideBar {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  grid-column: 1/2;
+  grid-row: 1/2;
+}
+.viewBar {
+  margin: 20px;
+  padding: 20px;
+  grid-column: 2/3;
+  display: flex;
+  justify-content: center;
+  align-items: flex-start;
+  background-color: rgba(245, 245, 245, 0.994);
+  border-radius: 50px;
+}
+.SideBar {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  flex-direction: column;
+  width: 100%;
+  height: 100%;
+}
+.navIcon {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin: 10px;
+  padding: 15px;
+  background-color: rgba(245, 245, 245, 0.573);
+  border-radius: 50%;
+  border: black;
+}
+.navImage {
+  width: 20px;
+  height: 20px;
+}
+.userImage {
+  width: 60px;
+  height: 60px;
+}

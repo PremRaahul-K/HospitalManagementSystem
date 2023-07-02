@@ -1,0 +1,61 @@
+.AdminHome {
+  display: flex;
+  justify-content: center;
+  align-items: flex-start;
+  flex-direction: column;
+}
+.hospitalData {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
+  align-items: center;
+}
+.hospitalInfo {
+  margin: 10px;
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-evenly;
+  align-items: center;
+  background-color: white;
+  border-radius: 25px;
+}
+.hospitalValue {
+  width: 200px;
+  height: 100px;
+  padding: 20px;
+  display: flex;
+  flex-direction: column;
+  flex-wrap: wrap;
+  justify-content: center;
+  align-items: center;
+}
+.labelImage {
+  padding: 15px;
+  width: 40px;
+  height: 40px;
+}
+.labelDiv {
+  margin: 15px;
+  border-radius: 50px;
+  background: #fff933;
+}
+.cardLabel {
+  color: black;
+  font-size: 18px;
+  font-family: monospace;
+  font-weight: bold;
+}
+.cardValue {
+  color: black;
+  font-size: 18px;
+  font-family: monospace;
+  background-color: #9fff33;
+  border-radius: 15px;
+  padding: 5px;
+}
+.patientCardValue {
+  background-color: #339fff;
+}
+.notApprovedCardValue {
+  background-color: #ff5733;
+}

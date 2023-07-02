@@ -19,7 +19,11 @@ function Login() {
     })
       .then(async (data) => {
         var myData = await data.json();
-        navigate("/profile");
+        if (myData.role == "Doctor") {
+          navigate("/doctor");
+        } else if (myData.role == "Patient") {
+          navigate("/patient");
+        }
         console.log(myData);
       })
       .catch((err) => {
@@ -28,19 +32,24 @@ function Login() {
   };
   return (
     <div className="Login">
-      <input
-        type="email"
-        onChange={(evet) => {
-          setUser({ ...user, email: evet.target.value });
-        }}
-      />
-      <input
-        type="password"
-        onChange={(event) => {
-          setUser({ ...user, password: event.target.value });
-        }}
-      />
-      <button onClick={login}>Login</button>
+      <div className="LoginImage">
+        <img src={""} className="loginPic" />
+      </div>
+      <div className="LoginDetails">
+        <input
+          type="email"
+          onChange={(evet) => {
+            setUser({ ...user, email: evet.target.value });
+          }}
+        />
+        <input
+          type="password"
+          onChange={(event) => {
+            setUser({ ...user, password: event.target.value });
+          }}
+        />
+        <button onClick={login}>Login</button>
+      </div>
     </div>
   );
 }
