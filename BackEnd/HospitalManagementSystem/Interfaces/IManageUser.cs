@@ -7,5 +7,6 @@ namespace HospitalManagementSystem.Interfaces
     {
         public Task<UserResponseDTO?> Login(UserRequestDTO user);
         public Task<UserResponseDTO?> AdminRegistration(UserDTO user);
+        public Task<UserCountDTO?> GetUsersCount();
     }
 }

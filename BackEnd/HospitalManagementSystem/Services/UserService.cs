@@ -45,6 +45,21 @@ namespace HospitalManagementSystem.Services
             return null;
         }
 
+        public async Task<UserCountDTO?> GetUsersCount()
+        {
+            UserCountDTO userCount = new UserCountDTO();
+            var users = await _userRepo.GetAll();
+            if (users != null )
+            {
+                var patientCount = users.Where(u => u.Role == "Patient").Count();
+                userCount.PatientCount = patientCount;
+                userCount.ApprovedDoctorCount = await _doctorService.GetCountOfApprovedDcotors();
+                userCount.NotApprovedDoctorCount = await _doctorService.GetCountOfNotApprovedDcotors();
+                return userCount;
+            }
+            return null;
+        }
+
         public async Task<UserResponseDTO?> Login(UserRequestDTO requestUser)
         {
             UserResponseDTO? responseUser = null;

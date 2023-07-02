@@ -1,4 +1,5 @@
 ﻿using HospitalManagementSystem.Interfaces;
+using HospitalManagementSystem.Models;
 using HospitalManagementSystem.Models.DTOs;
 using HospitalManagementSystem.Services;
 using Microsoft.AspNetCore.Http;
@@ -39,6 +40,18 @@ namespace HospitalManagementSystem.Controllers
                 return BadRequest("Unable to register");
             }
             return Created("Home", userResponseDTO);
+        }
+        [HttpGet]
+        [ProducesResponseType(typeof(ActionResult<ICollection<UserCountDTO>>), StatusCodes.Status200OK)]
+        [ProducesResponseType(StatusCodes.Status400BadRequest)]
+        public async Task<ActionResult<ICollection<UserCountDTO>>> GetAllUsersCount()
+        {
+            var countDTO = await _userService.GetUsersCount();
+            if (countDTO == null)
+            {
+                return NotFound("No doctors are available at the moment");
+            }
+            return Ok(countDTO);
         }
     }
 }

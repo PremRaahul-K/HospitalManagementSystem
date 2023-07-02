@@ -81,6 +81,39 @@ namespace HospitalManagementSystem.Services
             return null;
         }
 
+        public async Task<ICollection<Doctor>?> GetAllDcotorsByStatus(string status)
+        {
+            var doctors = await _repo.GetAll();
+            if (doctors != null)
+            {
+                var doctorsByStatus = doctors.Where(d => d.Status == status).ToList();
+                return doctorsByStatus;
+            }
+            return null;
+        }
+
+        public async Task<int> GetCountOfApprovedDcotors()
+        {
+            var doctors = await _repo.GetAll();
+            if (doctors != null)
+            {
+                var approvedCount = doctors.Where(d => d.Status == "Approved").ToList().Count();
+                return approvedCount;
+            }
+            return 0;
+        }
+
+        public async Task<int> GetCountOfNotApprovedDcotors()
+        {
+            var doctors = await _repo.GetAll();
+            if (doctors != null)
+            {
+                var notApprovedCount = doctors.Where(d => d.Status == "Not Approved").ToList().Count();
+                return notApprovedCount;
+            }
+            return 0;
+        }
+
         public async Task<Doctor?> GetDcotor(int id)
         {
             var doctor = await _repo.Get(id);

@@ -51,7 +51,7 @@
   font-family: monospace;
   background-color: #9fff33;
   border-radius: 15px;
-  padding: 5px;
+  padding: 5px 15px 5px 15px;
 }
 .patientCardValue {
   background-color: #339fff;

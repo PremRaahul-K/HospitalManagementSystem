@@ -43,6 +43,19 @@ namespace HospitalManagementSystem.Controllers
             }
             return Ok(doctor);
         }
+        [HttpPost]
+        //[Authorize(Roles = "Admin")]
+        [ProducesResponseType(typeof(ActionResult<Doctor>), StatusCodes.Status200OK)]
+        [ProducesResponseType(StatusCodes.Status400BadRequest)]
+        public async Task<ActionResult<ICollection<Doctor>>> GetAllDoctorsByStatus(string status)
+        {
+            var doctor = await _doctorService.GetAllDcotorsByStatus(status);
+            if (doctor == null)
+            {
+                return NotFound("No doctor are available at the moment");
+            }
+            return Ok(doctor);
+        }
         [HttpGet]
         //[Authorize(Roles = "Admin")]
         [ProducesResponseType(typeof(ActionResult<ICollection<Doctor>>), StatusCodes.Status200OK)]
