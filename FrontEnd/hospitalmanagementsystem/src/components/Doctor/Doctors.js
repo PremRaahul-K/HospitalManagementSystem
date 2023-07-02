@@ -1,9 +1,11 @@
 import React, { useEffect, useState } from "react";
 import "../Doctor/Doctors.css";
-import { Link, Routes, Route, json } from "react-router-dom";
+import { Link, Routes, Route, json, useNavigate } from "react-router-dom";
 import filtericon from "../images/filter-filled-tool-symbol.png";
 
 function Doctors() {
+  const navigate = useNavigate();
+  const [id, setId] = useState();
   const [status, setStatus] = useState();
   const [data, setData] = useState([]);
   useEffect(() => {
@@ -99,9 +101,14 @@ function Doctors() {
               <td className="smalldoc">{item.gender}</td>
               <td className="smalldoc">{item.status}</td>
               <td>
-                <Link className="profileViewButton" to="/admin/doctor">
+                <button
+                  className="profileViewButton userapprovalbutton"
+                  onClick={(event) => {
+                    navigate("/admin/doctor/" + item.user.id);
+                  }}
+                >
                   View
-                </Link>
+                </button>
               </td>
             </tr>
           ))}

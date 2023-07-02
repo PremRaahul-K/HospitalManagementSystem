@@ -1,8 +1,49 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import "../Doctor/Doctor.css";
 import DoctorImage from "../images/DoctorImage.png";
+import { useNavigate, useParams } from "react-router-dom";
 
 function Doctor() {
+  const navigate = useNavigate();
+  const { id } = useParams();
+  const [data, setData] = useState([]);
+  const [user, setUser] = useState([]);
+  useEffect(() => {
+    getDoctorDetails();
+    getUserDetails();
+  }, []);
+  var getDoctorDetails = () => {
+    fetch("http://localhost:5194/api/Doctor/GetDoctor?id=" + id, {
+      method: "POST",
+      headers: {
+        accept: "text/plain",
+        "Content-Type": "application/json",
+      },
+    })
+      .then(async (data) => {
+        var myData = await data.json();
+        setData(myData);
+      })
+      .catch((err) => {
+        console.log(err.error);
+      });
+  };
+  var getUserDetails = () => {
+    fetch("http://localhost:5194/api/User/GetAllUserDetails?id=+" + id, {
+      method: "POST",
+      headers: {
+        accept: "text/plain",
+        "Content-Type": "application/json",
+      },
+    })
+      .then(async (data) => {
+        var myData = await data.json();
+        setUser(myData);
+      })
+      .catch((err) => {
+        console.log(err.error);
+      });
+  };
   return (
     <div className="Doctor">
       <div className="doctorHeader">
@@ -10,7 +51,14 @@ function Doctor() {
           <h2>Doctor Information</h2>
         </div>
         <div>
-          <button className="deleteDoctor editDoctor">Edit Doctor</button>
+          <button
+            className="deleteDoctor editDoctor"
+            onClick={() => {
+              navigate("/admin/editdoctor/" + user.id);
+            }}
+          >
+            Edit Doctor
+          </button>
           <button className="deleteDoctor">Delete Doctor</button>
         </div>
       </div>
@@ -22,7 +70,7 @@ function Doctor() {
           <div className="description">
             <div></div>
             <div>
-              <h3>Name - Prem</h3>
+              <h3>Name - {data.name}</h3>
 
               <h4>About Doctor</h4>
               <p>
@@ -34,28 +82,28 @@ function Doctor() {
               </p>
               <div className="doctorInfo">
                 <div className="doctorInfoData">
-                  <h5>Email</h5>
-                  <span>prem@gamil.com</span>
-                </div>
-                <div className="doctorInfoData">
                   <h5>Specilization</h5>
-                  <span>prem@gamil.com</span>
+                  <span>{data.specialization}</span>
                 </div>
                 <div className="doctorInfoData">
                   <h5>License Number</h5>
-                  <span>prem@gamil.com</span>
+                  <span>{data.licenseNumber}</span>
                 </div>
                 <div className="doctorInfoData">
                   <h5>Qulifications</h5>
-                  <span>prem@gamil.com</span>
+                  <span>{data.qualifications}</span>
                 </div>
                 <div className="doctorInfoData">
                   <h5>Phone Number</h5>
-                  <span>+91 2839829389</span>
+                  <span>{data.phoneNumber}</span>
                 </div>
                 <div className="doctorInfoData">
                   <h5>Address</h5>
-                  <span>Chennai</span>
+                  <span>{data.address}</span>
+                </div>
+                <div className="doctorInfoData">
+                  <h5>Email</h5>
+                  <span>{user.email}</span>
                 </div>
               </div>
             </div>

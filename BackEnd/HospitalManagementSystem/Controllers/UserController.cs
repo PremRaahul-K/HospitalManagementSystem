@@ -53,5 +53,17 @@ namespace HospitalManagementSystem.Controllers
             }
             return Ok(countDTO);
         }
+        [HttpPost]
+        [ProducesResponseType(typeof(ActionResult<ICollection<UserCountDTO>>), StatusCodes.Status200OK)]
+        [ProducesResponseType(StatusCodes.Status400BadRequest)]
+        public async Task<ActionResult<ICollection<User>>> GetAllUserDetails(int id)
+        {
+            var user = await _userService.GetUserDetails(id);
+            if (user == null)
+            {
+                return NotFound("No doctors are available at the moment");
+            }
+            return Ok(user);
+        }
     }
 }

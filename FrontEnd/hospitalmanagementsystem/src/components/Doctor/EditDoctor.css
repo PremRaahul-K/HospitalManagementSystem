@@ -1,0 +1,48 @@
+.EditDoctorDetails {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
+  align-items: center;
+  flex-direction: column;
+}
+.updateDetails {
+  display: flex;
+  flex-wrap: wrap;
+  width: 600px;
+  justify-content: space-between;
+  align-items: center;
+}
+.UpdateDetailsInfo {
+  display: flex;
+  flex-wrap: wrap;
+  flex-direction: column;
+}
+.UpdateDetailsInfolabel {
+  color: black;
+  font-size: 15px;
+  font-family: monospace;
+  font-weight: bold;
+  margin: 5px;
+}
+.UpdateDetailsInfoInput {
+  width: 250px;
+  border: none;
+  height: 30px;
+  border-bottom: 1px solid black;
+  border-radius: 2px;
+  margin: 10px;
+}
+
+.smallLabel {
+  width: 150px;
+}
+
+.submitButton {
+  padding: 10px;
+  width: 100px;
+}
+@media screen and (max-width: 600px) {
+  .updateDetails {
+    width: 100%;
+  }
+}

@@ -10,6 +10,8 @@ import AdminHome from "./AdminHome";
 import { Link, Routes, Route } from "react-router-dom";
 import Doctors from "../Doctor/Doctors";
 import Doctor from "../Doctor/Doctor";
+import EditDoctor from "../Doctor/EditDoctor";
+import ApproveDoctor from "../Doctor/ApproveDoctor";
 
 function Admin() {
   return (
@@ -26,10 +28,10 @@ function Admin() {
             <Link to={"$/doctorsprofile"} className="doctors navIcon">
               <img src={doctors} className="navImage" />
             </Link>
-            <Link className="approvedoctor navIcon">
+            <Link to={"$/approvedoctor"} className="approvedoctor navIcon">
               <img src={approveDoctor} className="navImage" />
             </Link>
-            <Link className="editdoctor navIcon">
+            <Link to={"$/editdoctor"} className="editdoctor navIcon">
               <img src={edit} className="navImage" />
             </Link>
             <Link className="logout navIcon">
@@ -42,7 +44,10 @@ function Admin() {
         <Routes>
           <Route path="$/" element={<AdminHome />} />
           <Route path="$/doctorsprofile" element={<Doctors />} />
-          <Route path="/doctor" element={<Doctor />} />
+          <Route path="/doctor/:id" element={<Doctor />} />
+          <Route path="$/editdoctor" element={<EditDoctor />} />
+          <Route path="/editdoctor/:id" element={<EditDoctor />} />
+          <Route path="$/approvedoctor" element={<ApproveDoctor />} />
         </Routes>
       </div>
     </div>

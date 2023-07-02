@@ -1,0 +1,52 @@
+.DoctorsHeader {
+  display: flex;
+  width: 1000px;
+  justify-content: space-between;
+  flex-wrap: wrap;
+  align-items: center;
+}
+.labelDiv2 {
+  background-color: #b9fa81;
+  border-radius: 50px;
+  margin: 15px;
+}
+@media screen and (max-width: 600px) {
+  .DoctorsHeader {
+    width: 100%;
+  }
+}
+.hospitalValueupdated {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+  height: 100%;
+  width: 100%;
+}
+.approvalDoctorDetails {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: flex-start;
+}
+.userapprovalbutton {
+  width: 80px;
+}
+
+.viewProfile {
+  background-color: #045de9;
+  background-image: linear-gradient(315deg, #045de9 0%, #09c6f9 74%);
+}
+
+.ApproveProfile {
+  background-color: #7ee8fa;
+  background-image: linear-gradient(315deg, #7ee8fa 0%, #80ff72 74%);
+}
+
+.editProfile {
+  background-color: #5de6de;
+  background-image: linear-gradient(315deg, #5de6de 0%, #b58ecc 74%);
+}
+
+@media screen and (max-width: 600px) {
+}

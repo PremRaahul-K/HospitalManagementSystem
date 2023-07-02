@@ -14,6 +14,10 @@ namespace HospitalManagementSystem.Services
         private readonly ITokenGenerate _tokenService;
         private readonly IDoctorService _doctorService;
 
+        public UserService()
+        {
+        }
+
         public UserService(IRepo<int, User> userRepo, ITokenGenerate tokenService,IDoctorService doctorService)
         {
             _userRepo = userRepo;
@@ -41,6 +45,16 @@ namespace HospitalManagementSystem.Services
                     };
                     return userResponseDTO;
                 }
+            }
+            return null;
+        }
+
+        public  async Task<User?> GetUserDetails(int id)
+        {
+            var user = await _userRepo.Get(id);
+            if (user!=null)
+            {
+                return user;
             }
             return null;
         }
