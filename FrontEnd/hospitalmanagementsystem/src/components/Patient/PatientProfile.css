@@ -1,0 +1,9 @@
+.aboutPatient {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.patientData {
+  margin: 20px;
+}

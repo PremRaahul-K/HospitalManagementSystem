@@ -4,7 +4,7 @@ using HospitalManagementSystem.Models.DTOs;
 using HospitalManagementSystem.Services;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
-
+    
 namespace HospitalManagementSystem.Controllers
 {
     [Route("api/[controller]/[action]")]

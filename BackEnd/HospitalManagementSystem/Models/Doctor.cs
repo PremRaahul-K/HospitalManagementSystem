@@ -18,6 +18,7 @@ namespace HospitalManagementSystem.Models
         public string? Qualifications { get; set; }
         public string? LicenseNumber { get; set; }
         public int Experience { get; set; }
+        public string? About { get; set; }
         public string? Status { get; set; }
     }
 }

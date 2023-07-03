@@ -1,27 +1,28 @@
 import React, { useEffect, useState } from "react";
-import "../Doctor/Doctor.css";
 import DoctorImage from "../images/DoctorImage.png";
 import { useNavigate, useParams } from "react-router-dom";
 
-function Doctor() {
+function DoctorView() {
   const navigate = useNavigate();
   const { id } = useParams();
   const [data, setData] = useState([]);
   const [user, setUser] = useState([]);
   useEffect(() => {
-    getUserDetails();
     getDoctorDetails();
+    getUserDetails();
   }, []);
   var getDoctorDetails = () => {
-    var token = localStorage.getItem("token");
-    fetch("http://localhost:5194/api/Doctor/GetDoctor?id=" + id, {
-      method: "POST",
-      headers: {
-        accept: "text/plain",
-        "Content-Type": "application/json",
-        Authorization: "Bearer " + token,
-      },
-    })
+    fetch(
+      "http://localhost:5194/api/Doctor/GetDoctor?id=" +
+        localStorage.getItem("id"),
+      {
+        method: "POST",
+        headers: {
+          accept: "text/plain",
+          "Content-Type": "application/json",
+        },
+      }
+    )
       .then(async (data) => {
         var myData = await data.json();
         setData(myData);
@@ -31,15 +32,17 @@ function Doctor() {
       });
   };
   var getUserDetails = () => {
-    var token = localStorage.getItem("token");
-    fetch("http://localhost:5194/api/User/GetAllUserDetails?id=+" + id, {
-      method: "POST",
-      headers: {
-        accept: "text/plain",
-        "Content-Type": "application/json",
-        Authorization: "Bearer " + token,
-      },
-    })
+    fetch(
+      "http://localhost:5194/api/User/GetAllUserDetails?id=+" +
+        localStorage.getItem("id"),
+      {
+        method: "POST",
+        headers: {
+          accept: "text/plain",
+          "Content-Type": "application/json",
+        },
+      }
+    )
       .then(async (data) => {
         var myData = await data.json();
         setUser(myData);
@@ -54,17 +57,6 @@ function Doctor() {
         <div className="">
           <h2>Doctor Information</h2>
         </div>
-        <div>
-          <button
-            className="deleteDoctor editDoctor"
-            onClick={() => {
-              navigate("/admin/editdoctor/" + user.id);
-            }}
-          >
-            Edit Doctor
-          </button>
-          <button className="deleteDoctor">Delete Doctor</button>
-        </div>
       </div>
       <div className="aboutDoctor">
         <div>
@@ -77,7 +69,13 @@ function Doctor() {
               <h3>Name - {data.name}</h3>
 
               <h4>About Doctor</h4>
-              <p>{data.about}</p>
+              <p>
+                A doctor, also known as a physician or medical practitioner, is
+                a highly trained and skilled professional who diagnoses, treats,
+                and prevents illnesses and injuries in individuals. Doctors play
+                a crucial role in healthcare systems, working to promote and
+                maintain the well-being of their patients.
+              </p>
               <div className="doctorInfo">
                 <div className="doctorInfoData">
                   <h5>Specilization</h5>
@@ -111,4 +109,4 @@ function Doctor() {
     </div>
   );
 }
-export default Doctor;
+export default DoctorView;

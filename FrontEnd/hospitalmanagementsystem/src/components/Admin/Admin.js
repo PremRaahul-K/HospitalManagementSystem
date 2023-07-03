@@ -7,13 +7,14 @@ import logout from "../images/pngfind.com-black-button-png-49940.png";
 import approveDoctor from "../images/approved-icon-png.jpg";
 import user from "../images/user.png";
 import AdminHome from "./AdminHome";
-import { Link, Routes, Route } from "react-router-dom";
+import { Link, Routes, Route, useNavigate } from "react-router-dom";
 import Doctors from "../Doctor/Doctors";
 import Doctor from "../Doctor/Doctor";
 import EditDoctor from "../Doctor/EditDoctor";
 import ApproveDoctor from "../Doctor/ApproveDoctor";
 
 function Admin() {
+  const navigate = useNavigate();
   return (
     <div className="Admin">
       <div className="sideBar">
@@ -34,7 +35,13 @@ function Admin() {
             <Link to={"$/editdoctor"} className="editdoctor navIcon">
               <img src={edit} className="navImage" />
             </Link>
-            <Link className="logout navIcon">
+            <Link
+              className="logout navIcon"
+              to="/"
+              onClick={() => {
+                localStorage.clear();
+              }}
+            >
               <img src={logout} className="navImage" />
             </Link>
           </div>

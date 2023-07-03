@@ -1,18 +1,14 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import "../Admin/Admin.css";
 import home from "../images/Home.svg";
 import doctors from "../images/doctor-icon.png";
 import logout from "../images/pngfind.com-black-button-png-49940.png";
-import approveDoctor from "../images/approved-icon-png.jpg";
 import user from "../images/user.png";
-import { Link, Routes, Route } from "react-router-dom";
-import Doctors from "../Doctor/Doctors";
-import Doctor from "../Doctor/Doctor";
-import DoctorProfile from "../Doctor/DoctorProfile";
-import PatientProfile from "../Patient/PatientProfile";
-import ApprovedDoctors from "../Doctor/ApprovedDoctors";
+import { Link, Routes, Route, useNavigate } from "react-router-dom";
+import DoctorView from "./DoctorView";
 
-function Patient() {
+function DoctorHomePage() {
+  const navigate = useNavigate();
   return (
     <div className="Admin">
       <div className="sideBar">
@@ -23,9 +19,6 @@ function Patient() {
           <div>
             <Link to={"$/"} className="home navIcon">
               <img src={home} className="navImage" />
-            </Link>
-            <Link to={"$/approveddoctors"} className="doctors navIcon">
-              <img src={doctors} className="navImage" />
             </Link>
             <Link
               className="logout navIcon"
@@ -41,13 +34,11 @@ function Patient() {
       </div>
       <div className="viewBar">
         <Routes>
-          <Route path="$/" element={<PatientProfile />} />
-          <Route path="$/approveddoctors" element={<ApprovedDoctors />} />
-          <Route path="/doctorprofiles/:id" element={<DoctorProfile />} />
+          <Route path="$/" element={<DoctorView />} />
         </Routes>
       </div>
     </div>
   );
 }
 
-export default Patient;
+export default DoctorHomePage;

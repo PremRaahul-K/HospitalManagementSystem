@@ -1,19 +1,39 @@
-.Login {
-  display: grid;
-  grid-template-columns: 1fr 1fr;
-  width: 100%;
+.login {
+  background-image: linear-gradient(
+    to right top,
+    #051937,
+    #004d7a,
+    #008793,
+    #00bf72,
+    #a8eb12
+  );
 }
-.LoginImage {
-  background-color: red;
-}
-.LoginDetails {
+.loginRquestfields {
   display: flex;
-  justify-content: space-around;
-  flex-direction: column;
+  justify-content: center;
   align-items: center;
-  background-color: aquamarine;
-  height: 100%;
+  flex-direction: column;
 }
-.loginPic {
-  height: 200px;
+
+.LoginTitle {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  margin: 40px;
+}
+.signUpButtons {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin: 30px;
+}
+
+.inputfield {
+  width: 300px;
+  margin: 10px;
+  height: 35px;
+  border: 1px solid black;
+  border-radius: 50px;
+  text-align: center;
 }

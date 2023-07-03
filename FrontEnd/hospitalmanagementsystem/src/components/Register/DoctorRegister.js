@@ -1,19 +1,10 @@
 import React, { useEffect, useState } from "react";
-import "../Doctor/EditDoctor.css";
-import filtericon from "../images/filter-filled-tool-symbol.png";
-import { useParams } from "react-router-dom";
 import { useNavigate } from "react-router-dom";
 
-function EditDoctor() {
-  const { id } = useParams;
+function DoctorRegister() {
   const navigate = useNavigate();
-  const [user, setUser] = useState({
+  const [doctor, setUser] = useState({
     doctorId: 0,
-    user: {
-      id: 0,
-      email: "",
-      role: "",
-    },
     name: "",
     gender: "",
     dateOfBirth: new Date(),
@@ -25,46 +16,34 @@ function EditDoctor() {
     experience: 0,
     about: "",
     status: "",
+    passwordClear: "",
   });
-  const [doctor, setDoctor] = useState([]);
-  const [doctors, setDoctors] = useState([]);
-  useEffect(() => {
-    viewDoctors();
-  }, []);
-  var viewDoctors = () => {
-    var token = localStorage.getItem("token");
-    fetch("http://localhost:5194/api/Doctor/GetAllDoctors", {
-      method: "GET",
+  const [email, setEmail] = useState();
+
+  var register = () => {
+    console.log(doctor);
+    fetch("http://localhost:5194/api/Doctor/DoctorRegister", {
+      method: "POST",
       headers: {
         accept: "text/plain",
         "Content-Type": "application/json",
-        Authorization: "Bearer " + token,
       },
+      body: JSON.stringify({
+        ...doctor,
+        user: {
+          id: 0,
+          email: email,
+          role: "",
+        },
+      }),
     })
       .then(async (data) => {
         var myData = await data.json();
+        localStorage.setItem("id", myData.id);
+        localStorage.setItem("role", myData.role);
+        localStorage.setItem("token", myData.token);
+        navigate("/doctor/$/");
         console.log(myData);
-        setDoctors(myData);
-      })
-      .catch((err) => {
-        console.log(err.error);
-      });
-  };
-  var UpdateDoctorDetails = () => {
-    var token = localStorage.getItem("token");
-    fetch("http://localhost:5194/api/Doctor/Update", {
-      method: "PUT",
-      headers: {
-        accept: "text/plain",
-        "Content-Type": "application/json",
-        Authorization: "Bearer " + token,
-      },
-      body: JSON.stringify({ ...user }),
-    })
-      .then(async (data) => {
-        var myData = await data.json();
-        console.log(myData);
-        setDoctors(myData);
       })
       .catch((err) => {
         console.log(err.error);
@@ -74,26 +53,7 @@ function EditDoctor() {
     <div className="EditDoctor">
       <div className="EditDoctorDetails">
         <div>
-          <h2>Edit Doctor Details</h2>
-        </div>
-        <div className="Filter">
-          <span>Search By</span>
-          <select
-            className="doctorsFilter"
-            onChange={(event) => {
-              setUser({ ...user, doctorId: event.target.value });
-            }}
-          >
-            <option>Choose Doctor</option>
-            {doctors.map((item, index) => (
-              <option value={item.doctorId} key={index}>
-                {item.doctorId}
-              </option>
-            ))}
-          </select>
-          <div className="filterDiv">
-            <img src={filtericon} />
-          </div>
+          <h2>Doctor Registeration </h2>
         </div>
         <div className="updateDetails">
           <div className="UpdateDetailsInfo">
@@ -103,7 +63,7 @@ function EditDoctor() {
               type="text"
               placeholder="Name"
               onChange={(evet) => {
-                setUser({ ...user, name: evet.target.value });
+                setUser({ ...doctor, name: evet.target.value });
               }}
             />
           </div>
@@ -114,7 +74,7 @@ function EditDoctor() {
               type="text"
               placeholder="Specialization"
               onChange={(evet) => {
-                setUser({ ...user, specialization: evet.target.value });
+                setUser({ ...doctor, specialization: evet.target.value });
               }}
             />
           </div>
@@ -127,7 +87,7 @@ function EditDoctor() {
               type="text"
               placeholder="Qulifications"
               onChange={(evet) => {
-                setUser({ ...user, qualifications: evet.target.value });
+                setUser({ ...doctor, qualifications: evet.target.value });
               }}
             />
           </div>
@@ -138,7 +98,7 @@ function EditDoctor() {
               type="text"
               placeholder="License Number"
               onChange={(evet) => {
-                setUser({ ...user, licenseNumber: evet.target.value });
+                setUser({ ...doctor, licenseNumber: evet.target.value });
               }}
             />
           </div>
@@ -151,7 +111,7 @@ function EditDoctor() {
               type="text"
               placeholder="Experience"
               onChange={(evet) => {
-                setUser({ ...user, experience: evet.target.value });
+                setUser({ ...doctor, experience: evet.target.value });
               }}
             />
           </div>
@@ -162,7 +122,7 @@ function EditDoctor() {
               type="text"
               placeholder="Address"
               onChange={(evet) => {
-                setUser({ ...user, address: evet.target.value });
+                setUser({ ...doctor, address: evet.target.value });
               }}
             />
           </div>
@@ -175,7 +135,7 @@ function EditDoctor() {
               type="text"
               placeholder="Phone Number"
               onChange={(evet) => {
-                setUser({ ...user, phoneNumber: evet.target.value });
+                setUser({ ...doctor, phoneNumber: evet.target.value });
               }}
             />
           </div>
@@ -186,7 +146,7 @@ function EditDoctor() {
               type="date"
               placeholder="Date of Birth"
               onChange={(evet) => {
-                setUser({ ...user, dateOfBirth: evet.target.value });
+                setUser({ ...doctor, dateOfBirth: evet.target.value });
               }}
             />
           </div>
@@ -195,7 +155,7 @@ function EditDoctor() {
             <select
               className="UpdateDetailsInfoInput smallLabel"
               onChange={(evet) => {
-                setUser({ ...user, gender: evet.target.value });
+                setUser({ ...doctor, gender: evet.target.value });
               }}
             >
               <option>Other</option>
@@ -206,23 +166,56 @@ function EditDoctor() {
         </div>
         <div className="updateDetails">
           <div className="UpdateDetailsInfo">
+            <label className="UpdateDetailsInfolabel ">Email</label>
+            <input
+              className="UpdateDetailsInfoInput"
+              type="email"
+              placeholder="Email"
+              onChange={(event) => {
+                setEmail(event.target.value);
+              }}
+            />
+          </div>
+          <div className="UpdateDetailsInfo">
             <label className="UpdateDetailsInfolabel ">About</label>
             <input
               className="UpdateDetailsInfoInput"
               type="text"
               placeholder="About"
               onChange={(evet) => {
-                setUser({ ...user, about: evet.target.value });
+                setUser({ ...doctor, about: evet.target.value });
               }}
             />
           </div>
-
+        </div>
+        <div className="updateDetails">
+          <div className="UpdateDetailsInfo">
+            <label className="UpdateDetailsInfolabel ">Password</label>
+            <input
+              className="UpdateDetailsInfoInput"
+              type="text"
+              placeholder="Password"
+              onChange={(evet) => {
+                setUser({ ...doctor, passwordClear: evet.target.value });
+              }}
+            />
+          </div>
           <div className="UpdateDetailsInfo">
             <button
               className="deleteDoctor editDoctor submitButton"
-              onClick={UpdateDoctorDetails}
+              onClick={register}
             >
-              Submit
+              Register
+            </button>
+          </div>
+          <div className="UpdateDetailsInfo">
+            <button
+              className="deleteDoctor editDoctor submitButton"
+              onClick={() => {
+                navigate("/");
+              }}
+            >
+              Login
             </button>
           </div>
         </div>
@@ -231,4 +224,4 @@ function EditDoctor() {
   );
 }
 
-export default EditDoctor;
+export default DoctorRegister;

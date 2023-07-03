@@ -100,6 +100,7 @@ namespace HospitalManagementSystem.Services
                     doctor.Status = item.Status;
                     doctor.LicenseNumber = item.LicenseNumber;
                     doctor.Experience = item.Experience;
+                    doctor.About = item.About;
                     await _context.SaveChangesAsync();
                     return doctor;
                 }

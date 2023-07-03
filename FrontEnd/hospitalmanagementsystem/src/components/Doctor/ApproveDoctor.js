@@ -15,6 +15,7 @@ function ApproveDoctor() {
     viewDoctors();
   }, []);
   var GetUsersByStatus = (value) => {
+    var token = localStorage.getItem("token");
     console.log(value);
     if (value == "All Doctors") {
       viewDoctors();
@@ -27,6 +28,7 @@ function ApproveDoctor() {
           headers: {
             accept: "text/plain",
             "Content-Type": "application/json",
+            Authorization: "Bearer " + token,
           },
         }
       )
@@ -41,11 +43,13 @@ function ApproveDoctor() {
     }
   };
   var viewDoctors = () => {
+    var token = localStorage.getItem("token");
     fetch("http://localhost:5194/api/Doctor/GetAllDoctors", {
       method: "GET",
       headers: {
         accept: "text/plain",
         "Content-Type": "application/json",
+        Authorization: "Bearer " + token,
       },
     })
       .then(async (data) => {
@@ -58,11 +62,13 @@ function ApproveDoctor() {
       });
   };
   var ChangeStatus = (data) => {
+    var token = localStorage.getItem("token");
     fetch("http://localhost:5194/api/Doctor/ChangeDoctorStatus", {
       method: "PUT",
       headers: {
         accept: "text/plain",
         "Content-Type": "application/json",
+        Authorization: "Bearer " + token,
       },
       body: JSON.stringify(data),
     })
@@ -75,13 +81,13 @@ function ApproveDoctor() {
       });
   };
   const ApproveStyle = {
-    backgroundColor: "#7ee8fa",
-    backgroundImage: "linear-gradient(315deg, #7ee8fa 0%, #80ff72 74%)",
+    backgroundColor: "#3bb78f",
+    backgroundImage: "linear-gradient(315deg, #3bb78f 0%, #0bab64 74%)",
   };
 
   const NotApproveStyle = {
-    backgroundColor: "#ff0000",
-    backgroundImage: "linear-gradient(315deg, #ff0000 0%, #ffed00 74%)",
+    backgroundColor: "#c62128",
+    backgroundImage: "linear-gradient(147deg, #c62128 0%, #a00000 74%)",
   };
   return (
     <div className="ApproveDoctor">
@@ -109,9 +115,9 @@ function ApproveDoctor() {
       <table className="table">
         <thead>
           <tr className="headerRow">
-            <th>S.NO</th>
+            <th className="smalldoc">S.NO</th>
             <th>Doctor Name</th>
-            <th>Status</th>
+            <th className="smalldoc">Status</th>
             <th className="smalldoc">Edit</th>
             <th className="smalldoc">View</th>
             <th className="smalldoc">Delete</th>
@@ -137,7 +143,7 @@ function ApproveDoctor() {
               </td>
               <td className="smalldoc">
                 <button
-                  className="deleteDoctor userapprovalbutton viewProfile"
+                  className="deleteDoctor userapprovalbutton editProfile"
                   onClick={(event) => {
                     navigate("/admin/doctor/" + item.user.id);
                   }}
@@ -146,7 +152,7 @@ function ApproveDoctor() {
                 </button>
               </td>
               <td className="smalldoc">
-                <button className="profileViewButton userapprovalbutton">
+                <button className="profileViewButton userapprovalbutton editProfile">
                   Delete
                 </button>
               </td>

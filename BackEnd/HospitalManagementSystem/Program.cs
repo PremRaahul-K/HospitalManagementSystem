@@ -81,9 +81,9 @@ if (app.Environment.IsDevelopment())
     app.UseSwaggerUI();
 }
 
-app.UseAuthorization();
-app.UseAuthentication();
 app.UseCors("AngularCORS");
+app.UseAuthentication();
+app.UseAuthorization();
 
 app.MapControllers();
 
