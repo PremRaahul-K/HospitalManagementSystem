@@ -33,7 +33,6 @@ namespace HospitalManagementSystem.Controllers
             return Created("Home", userResponseDTO);
         }
         [HttpPost]
-        [Authorize(Roles = "Admin")]
         [ProducesResponseType(typeof(ActionResult<Doctor>), StatusCodes.Status200OK)]
         [ProducesResponseType(StatusCodes.Status400BadRequest)]
         public async Task<ActionResult<Doctor>> GetDoctor(int id)
@@ -98,7 +97,7 @@ namespace HospitalManagementSystem.Controllers
             return BadRequest("Unable to Delete doctor details");
         }
         [HttpPut]
-        //[Authorize(Roles = "Admin")]
+        [Authorize(Roles = "Admin")]
         [ProducesResponseType(typeof(ActionResult<Doctor>), StatusCodes.Status202Accepted)]
         [ProducesResponseType(StatusCodes.Status400BadRequest)]
         public async Task<ActionResult<Doctor>> ChangeDoctorStatus(ChangeStatusDTO changeStatusDTO)

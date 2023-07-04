@@ -1,9 +1,12 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import "../Login/Login.css";
 import { useNavigate } from "react-router-dom";
 import loginImage from "../images/hospital-logo.jpg";
 
 function Login(props) {
+  useEffect(() => {
+    localStorage.clear();
+  }, []);
   const navigate = useNavigate();
   var [user, setUser] = useState({
     email: "",
@@ -11,7 +14,6 @@ function Login(props) {
   });
 
   var login = () => {
-    console.log(user);
     fetch("http://localhost:5194/api/User/Login", {
       method: "POST",
       headers: {

@@ -1,18 +1,12 @@
-.login {
-  background-image: linear-gradient(
-    to right top,
-    #051937,
-    #004d7a,
-    #008793,
-    #00bf72,
-    #a8eb12
-  );
-}
 .loginRquestfields {
   display: flex;
   justify-content: center;
   align-items: center;
   flex-direction: column;
+  color: black;
+  font-family: monospace;
+  font-size: 15px;
+  font-weight: bold;
 }
 
 .LoginTitle {

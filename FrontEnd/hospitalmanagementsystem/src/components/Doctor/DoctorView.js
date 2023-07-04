@@ -12,6 +12,7 @@ function DoctorView() {
     getUserDetails();
   }, []);
   var getDoctorDetails = () => {
+    var token = localStorage.getItem("token");
     fetch(
       "http://localhost:5194/api/Doctor/GetDoctor?id=" +
         localStorage.getItem("id"),
@@ -20,6 +21,7 @@ function DoctorView() {
         headers: {
           accept: "text/plain",
           "Content-Type": "application/json",
+          Authorization: "Bearer " + token,
         },
       }
     )

@@ -12,11 +12,13 @@ function DoctorProfile() {
     getUserDetails();
   }, []);
   var getDoctorDetails = () => {
+    var token = localStorage.getItem("token");
     fetch("http://localhost:5194/api/Doctor/GetDoctor?id=" + id, {
       method: "POST",
       headers: {
         accept: "text/plain",
         "Content-Type": "application/json",
+        Authorization: "Bearer " + token,
       },
     })
       .then(async (data) => {
