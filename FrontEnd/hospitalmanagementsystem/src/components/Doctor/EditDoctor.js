@@ -3,9 +3,15 @@ import "../Doctor/EditDoctor.css";
 import filtericon from "../images/filter-filled-tool-symbol.png";
 import { useParams } from "react-router-dom";
 import { useNavigate } from "react-router-dom";
+import DoctorUpdationPopup from "../AlertMessages/DoctorUpdationPopup";
 
 function EditDoctor() {
   const navigate = useNavigate();
+  const [isOpen, setIsOpen] = useState(false);
+
+  const togglePopup = () => {
+    setIsOpen(!isOpen);
+  };
   const [error, setError] = useState("");
   const [user, setUser] = useState({
     doctorId: 0,
@@ -41,7 +47,6 @@ function EditDoctor() {
     status: "",
   });
   const [doctors, setDoctors] = useState([]);
-  const [phone, setPhone] = useState("");
   const [updatedDoctor, setUpdatedDoctors] = useState([]);
   useEffect(() => {
     viewDoctors();
@@ -58,7 +63,6 @@ function EditDoctor() {
     })
       .then(async (data) => {
         var myData = await data.json();
-        console.log(myData);
         setDoctors(myData);
       })
       .catch((err) => {
@@ -78,14 +82,12 @@ function EditDoctor() {
       .then(async (data) => {
         var myData = await data.json();
         setDoctor(myData);
-        setPhone(myData.phone);
       })
       .catch((err) => {
         console.log(err.error);
       });
   };
   var UpdateDoctorDetails = () => {
-    console.log(user);
     var token = localStorage.getItem("token");
     fetch("http://localhost:5194/api/Doctor/Update", {
       method: "PUT",
@@ -99,7 +101,8 @@ function EditDoctor() {
       .then(async (data) => {
         var myData = await data.json();
         setUpdatedDoctors(myData);
-        console.log(myData);
+        togglePopup();
+        navigate("/admin/doctor/" + myData.user.id);
       })
       .catch((err) => {
         console.log(err.error);
@@ -210,9 +213,8 @@ function EditDoctor() {
             <input
               className="UpdateDetailsInfoInput smallLabel"
               type="text"
-              value={phone}
+              placeholder={doctor.phoneNumber}
               onChange={(event) => {
-                setPhone(event.target.value);
                 setUser({ ...user, phoneNumber: event.target.value });
               }}
             />
@@ -274,6 +276,7 @@ function EditDoctor() {
             >
               Submit
             </button>
+            {isOpen && <DoctorUpdationPopup handleClose={togglePopup} />}
           </div>
         </div>
       </div>

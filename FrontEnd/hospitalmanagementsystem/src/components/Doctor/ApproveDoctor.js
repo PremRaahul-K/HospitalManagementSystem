@@ -5,8 +5,37 @@ import { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import doctor from "../images/doctor-icon.png";
 import patient from "../images/patient-icon.png";
+import DoctorUpdationPopup from "../AlertMessages/DoctorUpdationPopup";
+import emailjs from "emailjs-com";
 
 function ApproveDoctor() {
+  const [isOpen, setIsOpen] = useState(false);
+  const togglePopup = () => {
+    setIsOpen(!isOpen);
+  };
+
+  const handleApproval = (name, email) => {
+    const parameters = {
+      to_name: name,
+    };
+    emailjs
+      .send(
+        "service_e3al0pe",
+        "template_eysztjb",
+        {
+          to_email: email,
+          message: "Congratulations! You have been approved.",
+        },
+        "RWiZlZROTXGdsCZqH"
+      )
+      .then(() => {
+        console.log("Email sent successfully!");
+      })
+      .catch((error) => {
+        console.error("Error sending email:", error);
+      });
+  };
+
   const navigate = useNavigate();
   const [id, setId] = useState();
   const [status, setStatus] = useState();
@@ -34,7 +63,6 @@ function ApproveDoctor() {
       )
         .then(async (data) => {
           var myData = await data.json();
-          console.log(myData);
           setData(myData);
         })
         .catch((err) => {
@@ -54,7 +82,6 @@ function ApproveDoctor() {
     })
       .then(async (data) => {
         var myData = await data.json();
-        console.log(myData);
         setData(myData);
       })
       .catch((err) => {
@@ -75,6 +102,7 @@ function ApproveDoctor() {
       .then(async (data) => {
         var myData = await data.json();
         GetUsersByStatus();
+        togglePopup();
       })
       .catch((err) => {
         console.log(err.error);
@@ -115,12 +143,11 @@ function ApproveDoctor() {
       <table className="table">
         <thead>
           <tr className="headerRow">
-            <th className="smalldoc">S.NO</th>
+            <th>S.NO</th>
             <th>Doctor Name</th>
             <th className="smalldoc">Status</th>
             <th className="smalldoc">Edit</th>
             <th className="smalldoc">View</th>
-            <th className="smalldoc">Delete</th>
             <th>Change Status</th>
           </tr>
         </thead>
@@ -129,7 +156,7 @@ function ApproveDoctor() {
             <tr key={index}>
               <th className="serialNo">{index + 1}</th>
               <td>{item.name}</td>
-              <td>{item.status}</td>
+              <td className="smalldoc">{item.status}</td>
               <td className="smalldoc">
                 {" "}
                 <button
@@ -151,11 +178,6 @@ function ApproveDoctor() {
                   View
                 </button>
               </td>
-              <td className="smalldoc">
-                <button className="profileViewButton userapprovalbutton editProfile">
-                  Delete
-                </button>
-              </td>
               <td>
                 <button
                   className="profileViewButton userapprovalbutton"
@@ -171,10 +193,12 @@ function ApproveDoctor() {
                       doctorId: item.doctorId,
                       updatedStatus: userStatus,
                     });
+                    handleApproval(item.name, item.user.email);
                   }}
                 >
                   {item.status == "Approved" ? "Disapprove" : "Approve"}
                 </button>
+                {isOpen && <DoctorUpdationPopup handleClose={togglePopup} />}
               </td>
             </tr>
           ))}

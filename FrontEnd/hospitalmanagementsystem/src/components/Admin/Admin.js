@@ -22,19 +22,24 @@ function Admin() {
           <div className="userProfile navIcon">
             <img src={user} className="userImage" />
           </div>
-          <div>
+          <div className="navItems">
             <Link to={"$/"} className="home navIcon">
               <img src={home} className="navImage" />
             </Link>
+            <h6>Home</h6>
+
             <Link to={"$/doctorsprofile"} className="doctors navIcon">
               <img src={doctors} className="navImage" />
             </Link>
+            <h6>View Doctors</h6>
             <Link to={"$/approvedoctor"} className="approvedoctor navIcon">
               <img src={approveDoctor} className="navImage" />
             </Link>
+            <h6>Approve Doctors</h6>
             <Link to={"$/editdoctor"} className="editdoctor navIcon">
               <img src={edit} className="navImage" />
             </Link>
+            <h6>Edit Doctor</h6>
             <Link
               className="logout navIcon"
               to="/"
@@ -44,6 +49,7 @@ function Admin() {
             >
               <img src={logout} className="navImage" />
             </Link>
+            <h6>Logout</h6>
           </div>
         </div>
       </div>

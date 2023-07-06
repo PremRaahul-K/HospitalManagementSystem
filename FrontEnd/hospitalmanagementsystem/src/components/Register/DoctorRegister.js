@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
+import DoctorApprovalPopup from "../AlertMessages/DoctorApprovalPopup";
 
 function DoctorRegister() {
   const navigate = useNavigate();
@@ -18,8 +19,11 @@ function DoctorRegister() {
     status: "",
     passwordClear: "",
   });
+  const [isOpen, setIsOpen] = useState(false);
   const [email, setEmail] = useState();
-
+  const togglePopup = () => {
+    setIsOpen(!isOpen);
+  };
   var register = () => {
     console.log(doctor);
     fetch("http://localhost:5194/api/Doctor/DoctorRegister", {
@@ -42,8 +46,11 @@ function DoctorRegister() {
         localStorage.setItem("id", myData.id);
         localStorage.setItem("role", myData.role);
         localStorage.setItem("token", myData.token);
-        navigate("/doctor/$/");
-        console.log(myData);
+        if (myData.token != null) {
+          navigate("/doctor/$/");
+        }
+        togglePopup();
+        navigate("/login");
       })
       .catch((err) => {
         console.log(err.error);
@@ -207,6 +214,7 @@ function DoctorRegister() {
             >
               Register
             </button>
+            {isOpen && <DoctorApprovalPopup handleClose={togglePopup} />}
           </div>
           <div className="UpdateDetailsInfo">
             <button

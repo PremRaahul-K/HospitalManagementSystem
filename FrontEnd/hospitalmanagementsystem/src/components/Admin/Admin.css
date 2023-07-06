@@ -13,6 +13,7 @@
   margin: 20px;
   padding: 20px;
   grid-column: 2/3;
+  width: 90%;
   display: flex;
   justify-content: center;
   align-items: flex-start;
@@ -31,8 +32,8 @@
   display: flex;
   justify-content: center;
   align-items: center;
-  margin: 10px;
-  padding: 15px;
+  margin: 5px;
+  padding: 10px;
   background-color: rgba(245, 245, 245, 0.573);
   border-radius: 50%;
   border: black;
@@ -42,6 +43,16 @@
   height: 20px;
 }
 .userImage {
-  width: 60px;
-  height: 60px;
+  width: 80px;
+  height: 80px;
+}
+
+.navItems {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+
+@media screen and (max-width: 910px) {
 }

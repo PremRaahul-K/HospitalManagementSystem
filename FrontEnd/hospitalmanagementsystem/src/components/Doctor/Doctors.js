@@ -13,7 +13,6 @@ function Doctors() {
   }, []);
   var GetUsersByStatus = (value) => {
     var token = localStorage.getItem("token");
-    console.log(value);
     if (value == "All Doctors") {
       viewDoctors();
     } else {
@@ -31,7 +30,6 @@ function Doctors() {
       )
         .then(async (data) => {
           var myData = await data.json();
-          console.log(myData);
           setData(myData);
         })
         .catch((err) => {
@@ -51,7 +49,6 @@ function Doctors() {
     })
       .then(async (data) => {
         var myData = await data.json();
-        console.log(myData);
         setData(myData);
       })
       .catch((err) => {

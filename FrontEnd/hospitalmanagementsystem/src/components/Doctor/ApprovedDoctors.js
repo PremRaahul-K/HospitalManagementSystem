@@ -4,6 +4,7 @@ import { Link, Routes, Route, json, useNavigate } from "react-router-dom";
 import filtericon from "../images/filter-filled-tool-symbol.png";
 
 function ApprovedDoctors() {
+  var token = localStorage.getItem("token");
   const navigate = useNavigate();
   const [id, setId] = useState();
   const [data, setData] = useState([]);
@@ -18,12 +19,12 @@ function ApprovedDoctors() {
         headers: {
           accept: "text/plain",
           "Content-Type": "application/json",
+          Authorization: "Bearer " + token,
         },
       }
     )
       .then(async (data) => {
         var myData = await data.json();
-        console.log(myData);
         setData(myData);
       })
       .catch((err) => {
@@ -40,7 +41,6 @@ function ApprovedDoctors() {
     })
       .then(async (data) => {
         var myData = await data.json();
-        console.log(myData);
         setData(myData);
       })
       .catch((err) => {

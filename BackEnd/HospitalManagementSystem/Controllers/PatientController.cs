@@ -3,11 +3,15 @@ using HospitalManagementSystem.Models.DTOs;
 using HospitalManagementSystem.Models;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Cors;
 
 namespace HospitalManagementSystem.Controllers
 {
     [Route("api/[controller]/[action]")]
     [ApiController]
+    [Authorize]
+    [EnableCors("AngularCORS")]
     public class PatientController : ControllerBase
     {
         private readonly IPatientService _patientService;

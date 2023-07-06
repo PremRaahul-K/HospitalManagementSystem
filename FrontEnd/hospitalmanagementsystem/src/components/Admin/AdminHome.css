@@ -59,3 +59,66 @@
 .notApprovedCardValue {
   background-color: #ff5733;
 }
+
+.userPercentages {
+  display: flex;
+  width: 70%;
+  background-color: white;
+  justify-content: center;
+  flex-direction: column;
+  align-items: center;
+  flex-wrap: wrap;
+  margin: 10px;
+  height: 20%;
+  border-radius: 50px;
+}
+
+.pieChart {
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
+  flex-wrap: wrap;
+}
+
+.ApprovedDoctorsColour {
+  background-color: #0088fe;
+  width: 20px;
+  height: 20px;
+  border-radius: 50px;
+  font-family: monospace;
+  font-size: 5px;
+  color: black;
+  margin: 5px;
+}
+
+.barChartColour {
+  display: flex;
+  justify-content: flex-start;
+  align-items: center;
+}
+
+.NotApprovedDoctorsColour {
+  background-color: #00c49f;
+  width: 20px;
+  height: 20px;
+  border-radius: 50px;
+  font-family: monospace;
+  font-size: 5px;
+  color: black;
+  margin: 5px;
+}
+
+.PatientsColour {
+  background-color: #ff8042;
+  width: 20px;
+  height: 20px;
+  border-radius: 50px;
+  font-family: monospace;
+  font-size: 5px;
+  color: black;
+  margin: 5px;
+}
+
+.pieChart {
+  display: flex;
+}

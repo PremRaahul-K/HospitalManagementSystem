@@ -2,8 +2,10 @@ import React, { useEffect, useState } from "react";
 import "../Doctor/Doctor.css";
 import DoctorImage from "../images/DoctorImage.png";
 import { useNavigate, useParams } from "react-router-dom";
+import DoctorDelete from "../AlertMessages/DoctorDelete";
 
 function Doctor() {
+  const [isOpen, setIsOpen] = useState(false);
   const navigate = useNavigate();
   const { id } = useParams();
   const [data, setData] = useState([]);
@@ -12,6 +14,9 @@ function Doctor() {
     getUserDetails();
     getDoctorDetails();
   }, []);
+  const togglePopup = () => {
+    setIsOpen(!isOpen);
+  };
   var getDoctorDetails = () => {
     var token = localStorage.getItem("token");
     fetch("http://localhost:5194/api/Doctor/GetDoctor?id=" + id, {
@@ -48,6 +53,25 @@ function Doctor() {
         console.log(err.error);
       });
   };
+  var DeleteUserDetails = () => {
+    var token = localStorage.getItem("token");
+    fetch("http://localhost:5194/api/Doctor/Delete?id=" + id, {
+      method: "DELETE",
+      headers: {
+        accept: "text/plain",
+        "Content-Type": "application/json",
+        Authorization: "Bearer " + token,
+      },
+    })
+      .then(async (data) => {
+        var myData = await data.json();
+        alert("the user is deleted");
+        togglePopup();
+      })
+      .catch((err) => {
+        console.log(err.error);
+      });
+  };
   return (
     <div className="Doctor">
       <div className="doctorHeader">
@@ -63,7 +87,10 @@ function Doctor() {
           >
             Edit Doctor
           </button>
-          <button className="deleteDoctor">Delete Doctor</button>
+          <button className="deleteDoctor" onClick={DeleteUserDetails}>
+            Delete Doctor
+          </button>
+          {isOpen && <DoctorDelete handleClose={togglePopup} />}
         </div>
       </div>
       <div className="aboutDoctor">
